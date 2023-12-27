@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>A Vine on a House</title>
+    <style>
+      .story {
+        margin: 10%;
+        text-align: center;
+        font-family: Georgia, "Times New Roman", Times, serif;
+        font-size: larger;
+      }
+
+      .story-choices button {
+        background-color: transparent;
+        color: #556b2f;
+        font-size: large;
+        font-style: italic;
+        border: none;
+        cursor: pointer;
+      }
+
+      .story-image img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 50%;
+        max-height: 30%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="story">
+      <div class="story-image"></div>
+      <p class="story-text"></p>
+      <div class="story-choices"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.4.0/purify.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.1.0/marked.min.js"></script>
+    <script src="https://github.com/mde/ejs/releases/download/v3.1.9/ejs.js"></script>
+    <script>
+      const state = { $state: {} };
+
+      const safeMarkdown = (md) => DOMPurify.sanitize(marked.parse(md));
+      const evalCondition = ($state, condition) => {
+        return eval(condition);
+      };
+
+      const data = {
+        version: "1.0.0",
+        settings: {
+          author: "Tyler Wright; Kimberly Renee",
+          gameTitle: "A Vine on a House",
+          pageCount: 2,
+          categories: [{ name: "category name", visible: true }],
+        },
+        format: {
+          textColor: "initial",
+          textFont: "sans-serif",
+          btnColor: "492e10",
+          btnFont: "sans-serif",
+          background: "#A9A9A9",
+          page: "#799943",
+        },
+        pages: [
+          {
+            id: 1,
+            isFirst: true,
+            name: "A Vine on a House",
+            text: 'This is a game adaptation of Ambrose Bierce\'s "A Vine on a House" (1905), curated by Tyler Wright with photographs by Kimberly Renee. Music by Dylan Wright.',
+            next: [{ action: "START GAME", pageId: 2 }],
+            format: {},
+            image: "Bierce.jpg",
+          },
+          {
+            id: 2,
+            name: "1",
+            isFirst: false,
+            text: 'About three miles from the little town of Norton, in Missouri, on the road leading to Maysville, stands an old house that was last occupied by a family named Harding. Since 1886 no one has lived in it, nor is anyone likely to live in it again. Time and the disfavor of persons dwelling thereabout are converting it into a rather picturesque ruin. An observer unacquainted with its history would hardly put it into the category of "haunted houses," yet in all the region round such is its evil reputation. Its windows are without glass, its doorways without doors; there are wide breaches in the shingle roof, and for lack of paint the weatherboarding is a dun gray. But these unfailing signs of the supernatural are partly concealed and greatly softened by the abundant foliage of a large vine overrunning the entire structure. This vine--of a species which no botanist has ever been able to name--has an important part in the story of the house.',
+            next: [
+              { action: "NEXT", pageId: 3 },
+              { action: "BACK", pageId: 1 },
+            ],
+            format: {},
+            image: "1.jpg",
+          },
+          {
+            id: 3,
+            isFirst: false,
+            name: "2",
+            text: "The Harding family consisted of Robert Harding, his wife Matilda, Miss Julia Went, who was her sister, and two young children. Robert Harding was a silent, cold-mannered man who made no friends in the neighborhood and apparently cared to make none. He was about forty years old, frugal and industrious, and made a living from the little farm which is now overgrown with brush and brambles. He and his sister-in-law were rather tabooed by their neighbors, who seemed to think that they were seen too frequently together--not entirely their fault, for at these times they evidently did not challenge observation. The moral code of rural Missouri is stern and exacting.\n\nMrs. Harding was a gentle, sad-eyed woman, lacking a left foot.",
+            next: [
+              { action: "NEXT", pageId: 4 },
+              { action: "BACK", pageId: 2 },
+            ],
+            format: {},
+            image: "2.jpg",
+          },
+          {
+            id: 4,
+            isFirst: false,
+            name: "3",
+            text: 'At some time in 1884 it became known that she had gone to visit her mother in Iowa. That was what her husband said in reply to inquiries, and his manner of saying it did not encourage further questioning. She never came back, and two years later, without selling his farm or anything that was his, or appointing an agent to look after his interests, or removing his household goods, Harding, with the rest of the family, left the country. Nobody knew whither he went; nobody at that time cared. Naturally, whatever was movable about the place soon disappeared and the deserted house became "haunted" in the manner of its kind.',
+            next: [
+              { action: "NEXT", pageId: 5 },
+              { action: "BACK", pageId: 3 },
+            ],
+            format: {},
+            image: "3.jpg",
+          },
+          {
+            id: 5,
+            isFirst: false,
+            name: "4",
+            text: "One summer evening, four or five years later, the Rev. J. Gruber, of Norton, and a Maysville attorney named Hyatt met on horseback in front of the Harding place. Having business matters to discuss, they hitched their animals and going to the house sat on the porch to talk. Some humorous reference to the somber reputation of the place was made and forgotten as soon as uttered, and they talked of their business affairs until it grew almost dark. The evening was oppressively warm, the air stagnant.",
+            next: [
+              { action: "NEXT", pageId: 14 },
+              { action: "BACK", pageId: 4 },
+            ],
+            format: {},
+            image: "4.jpg",
+          },
+          {
+            id: 7,
+            isFirst: false,
+            name: "6",
+            text: "And leave they did. Forgetting that they had been traveling in opposite directions, they rode away together. They went to Norton, where they related their strange experience to several discreet friends. The next evening, at about the same hour, accompanied by two others whose names are not recalled, they were again on the porch of the Harding house, and again the mysterious phenomenon occurred: the vine was violently agitated while under the closest scrutiny from root to tip, nor did their combined strength applied to the trunk serve to still it. After an hour's observation they retreated, no less wise, it is thought, than when they had come.",
+            next: [
+              { action: "NEXT", pageId: 8 },
+              { action: "BACK", pageId: 14 },
+            ],
+            format: {},
+            image: "6.jpg",
+          },
+          {
+            id: 8,
+            isFirst: false,
+            name: "7",
+            text: 'No great time was required for these singular facts to rouse the curiosity of the entire neighborhood. By day and by night crowds of persons assembled at the Harding house "seeking a sign." It does not appear that any found it, yet so credible were the witnesses mentioned that none doubted the reality of the "manifestations" to which they testified.',
+            next: [
+              { action: "NEXT", pageId: 9 },
+              { action: "BACK", pageId: 7 },
+            ],
+            format: {},
+            image: "7.jpg",
+          },
+          {
+            id: 9,
+            isFirst: false,
+            name: "8",
+            text: "By either a happy inspiration or some destructive design, it was one day proposed--nobody appeared to know from whom the suggestion came- -to dig up the vine, and after a good deal of debate this was done. Nothing was found but the root, yet nothing could have been more strange!\n\nFor five or six feet from the trunk, which had at the surface of the ground a diameter of several inches, it ran downward, single and straight, into a loose, friable earth; then it divided and subdivided into rootlets, fibers and filaments, most curiously interwoven. When carefully freed from soil they showed a singular formation. In their ramifications and doublings back upon themselves they made a compact network, having in size and shape an amazing resemblance to the human figure. Head, trunk and limbs were there; even the fingers and toes were distinctly defined; and many professed to see in the distribution and arrangement of the fibers in the globular mass representing the head a grotesque suggestion of a face. The figure was horizontal; the smaller roots had begun to unite at the breast.",
+            next: [
+              { action: "NEXT", pageId: 10 },
+              { action: "BACK", pageId: 8 },
+            ],
+            format: {},
+            image: "8.jpg",
+          },
+          {
+            id: 10,
+            isFirst: false,
+            name: "9",
+            text: "In point of resemblance to the human form this image was imperfect. At about ten inches from one of the knees, the cilia forming that leg had abruptly doubled backward and inward upon their course of growth. The figure lacked the left foot.\n\nThere was but one inference--the obvious one; but in the ensuing excitement as many courses of action were proposed as there were incapable counselors. The matter was settled by the sheriff of the county, who as the lawful custodian of the abandoned estate ordered the root replaced and the excavation filled with the earth that had been removed.",
+            next: [
+              { action: "NEXT", pageId: 11 },
+              { action: "BACK", pageId: 9 },
+            ],
+            format: {},
+            image: "9.jpg",
+          },
+          {
+            id: 11,
+            isFirst: false,
+            name: "10",
+            text: "Later inquiry brought out only one fact of relevancy and significance: Mrs. Harding had never visited her relatives in Iowa, nor did they know that she was supposed to have done so.",
+            next: [
+              { action: "NEXT", pageId: 12 },
+              { action: "BACK", pageId: 10 },
+            ],
+            format: {},
+            image: "10.jpg",
+          },
+          {
+            id: 12,
+            isFirst: false,
+            name: "11",
+            text: "Of Robert Harding and the rest of his family nothing is known. The house retains its evil reputation, but the replanted vine is as orderly and well-behaved a vegetable as a nervous person could wish to sit under of a pleasant night, when the katydids grate out their immemorial revelation and the distant whippoorwill signifies his notion of what ought to be done about it.",
+            next: [
+              { action: "NEXT", pageId: 13 },
+              { action: "BACK", pageId: 11 },
+            ],
+            format: {},
+            image: "11.jpg",
+          },
+          {
+            id: 13,
+            isFirst: false,
+            name: "12",
+            text: "END",
+            next: [
+              { action: "BACK", pageId: 12 },
+              { action: "START OVER", pageId: 1 },
+            ],
+            format: {},
+            image: "Bierce.jpg",
+          },
+          {
+            id: 14,
+            isFirst: false,
+            name: "5",
+            text: 'Presently both men started from their seats in surprise: a long vine that covered half the front of the house and dangled its branches from the edge of the porch above them was visibly and audibly agitated, shaking violently in every stem and leaf.\n\n"We shall have a storm," Hyatt exclaimed.\n\nGruber said nothing, but silently directed the other\'s attention to the foliage of adjacent trees, which showed no movement; even the delicate tips of the boughs silhouetted against the clear sky were motionless. They hastily passed down the steps to what had been a lawn and looked upward at the vine, whose entire length was now visible. It continued in violent agitation, yet they could discern no disturbing cause.\n\n"Let us leave," said the minister.',
+            next: [
+              { action: "NEXT", pageId: 7 },
+              { action: "BACK", pageId: 5 },
+            ],
+            format: {},
+            image: "5.jpg",
+          },
+        ],
+      };
+      const divStory = document.querySelector(".story");
+      const divImage = divStory.querySelector(".story-image");
+      const divText = divStory.querySelector(".story-text");
+      const divChoices = divStory.querySelector(".story-choices");
+
+      const decrypter = (str, key) => {
+        const chars = str.split(",");
+        const codes = chars.map((char, index) => {
+          return String.fromCharCode(
+            parseInt(char) - key.charCodeAt(index % key.length)
+          );
+        });
+        return codes.join("");
+      };
+
+      const format = function (pageId) {
+        let page = data.pages.find((p) => p.id == pageId);
+        if (!page) {
+          alert("no page found !");
+          return;
+        }
+
+        const pageFormat = page.format;
+        const globalFormat = data.format;
+
+        divImage.innerHTML = "";
+        if (page.image) {
+          const img = document.createElement("img");
+          img.src = "assets/images/" + page.image;
+          divImage.appendChild(img);
+        }
+
+        document.body.style.backgroundColor =
+          pageFormat.background || globalFormat.background;
+        divStory.style.backgroundColor = pageFormat.page || globalFormat.page;
+        divText.style.color = pageFormat.textColor || globalFormat.textColor;
+
+        divText.innerHTML = safeMarkdown(ejs.render(page.text, state));
+        divChoices.innerHTML = "";
+
+        for (nex of page.next) {
+          if (
+            nex.condition !== undefined &&
+            nex.condition !== "" &&
+            !evalCondition(state.$state, nex.condition)
+          ) {
+            continue;
+          }
+
+          let button = document.createElement("button");
+          button.innerHTML = safeMarkdown(nex.action);
+          button.setAttribute("pageId", nex.pageId);
+          button.addEventListener("click", function () {
+            format(this.getAttribute("pageId"));
+          });
+          button.style.color = pageFormat.btnColor || globalFormat.btnColor;
+          divChoices.appendChild(button);
+          divChoices.appendChild(document.createElement("br"));
+        }
+      };
+
+      format(data.pages.find((p) => p.isFirst).id);
+    </script>
+    <audio id="skeleton.mp3" src="skeleton.mp3" autoplay loop></audio>
+    <script>
+      function unmute() {
+        document.getElementById("skeleton.mp3").play();
+        document.removeEventListener("pointerup", unmute);
+        document.removeEventListener("keydown", unmute);
+      }
+      document.addEventListener("pointerup", unmute);
+      document.addEventListener("keydown", unmute);
+    </script>
+  </body>
+</html>
